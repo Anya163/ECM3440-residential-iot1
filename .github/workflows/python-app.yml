@@ -5,7 +5,7 @@ name: Python application
 
 on:
   push:
-    branches: [ main, develop, feature/* ]
+    branches: [ main, develop, feature/*, fred ]
   pull_request:
     branches: [ main, develop, feature/* ]
 
@@ -46,7 +46,6 @@ jobs:
     needs: python-build
     
     steps:
-    # checkout the repo
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@main
 
@@ -55,7 +54,6 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Automates az container create command 
     - name: 'Build and push image'
       uses: azure/docker-login@v1
       with:
@@ -66,25 +64,14 @@ jobs:
         docker build . -t ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }} 
         docker push ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
 
-  deploy-aci:
+  deploy:
     runs-on: ubuntu-latest
     needs: image-build
 
     steps:
-
-    - name: 'Login via Azure CLI'
-      uses: azure/login@v1
+    - name: Deploy to Azure App Service for containers
+      uses: azure/webapps-deploy@v2
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: 'Deploy to Azure Container Instances'
-      uses: 'azure/aci-deploy@v1'
-      with:
-        resource-group: ${{ secrets.RESOURCE_GROUP }}
-        dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-        image: ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
-        registry-login-server: ${{ secrets.PROSPERITY_CR }}
-        registry-username: ${{ secrets.PROSPERITY_CR_USERNAME }}
-        registry-password: ${{ secrets.PROSPERITY_CR_PASSWORD }}
-        name: prosperity
-        location: 'UK Sout'
+        app-name: 'prosperity-app'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
