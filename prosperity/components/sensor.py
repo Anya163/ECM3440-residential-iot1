@@ -28,7 +28,8 @@ IOT_HUB_CONNECTION_STRING = os.getenv('IOT_HUB_CONNECTION_STRING')
 adc = ADC()
 relay = GroveRelay(RELAY_PIN)
 
-
+# Name: counterfit_connection
+# Description: 
 # Establish connection with CounterFit App
 def counterfit_connection():
     try:
