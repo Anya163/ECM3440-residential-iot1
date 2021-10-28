@@ -47,8 +47,8 @@ jobs:
     needs: python-build
     
     steps:
+    if: github.ref == 'develop' 
     - name: 'Checkout GitHub Action'
-      if: github.ref == 'develop' 
       uses: actions/checkout@main
 
     - name: 'Login via Azure CLI'
