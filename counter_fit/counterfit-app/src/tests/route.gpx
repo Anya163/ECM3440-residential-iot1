@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" creator="AllTrails.com" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name><![CDATA[Trail Planner Map]]></name>
+    <desc><![CDATA[]]></desc>
+    <link href="http://www.alltrails.com">
+      <text>AllTrails, LLC</text>
+    </link>
+    <bounds minlat="47.72935" minlon="-122.26477" maxlat="47.73552" maxlon="-122.25581"/>
+  </metadata>
+  <trk>
+    <name><![CDATA[Trail Planner Map]]></name>
+    <desc><![CDATA[]]></desc>
+    <src>AllTrails</src>
+    <trkseg>
+      <trkpt lat="47.73481" lon="-122.257">
+        <ele>107.05</ele>
+      </trkpt>
+      <trkpt lat="47.73481" lon="-122.25701">
+        <ele>107.05</ele>
+      </trkpt>
+      <trkpt lat="47.73476" lon="-122.25682">
+        <ele>108.0</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

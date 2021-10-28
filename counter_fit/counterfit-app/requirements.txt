@@ -1,0 +1,10 @@
+flask
+flask-socketio
+eventlet
+setuptools
+twine
+wheel
+pytest
+pytest-runner
+beautifulsoup4
+lxml

@@ -1,0 +1,9 @@
+azure-iot-device
+counterfit-connection
+counterfit-shims-grove
+pytest
+mockito
+pytest-cov
+radon
+pytest-dotenv
+flake8
