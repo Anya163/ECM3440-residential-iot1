@@ -101,5 +101,4 @@ def test_unsuccessful_handle_request_method(create_from_method_request):
         name = "Test"
 
     sensor.handle_method_request(test_request, IoTHubDeviceClient)
-    assert sensor.handle_method_request(test_request,
-                                        IoTHubDeviceClient) is None
+    assert 1 == 0
