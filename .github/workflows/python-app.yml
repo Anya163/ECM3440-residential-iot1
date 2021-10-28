@@ -68,8 +68,8 @@ jobs:
 
     - name: 'Container image scan'
       uses: Azure/container-scan@v0
-        with:
-          image-name: ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
+      with:
+        image-name: ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
 
     - name: 'Push image to Prosperity CR'
       uses: azure/docker-login@v1
