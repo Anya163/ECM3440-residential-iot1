@@ -78,7 +78,10 @@ def handle_method_request(request, device_client):
         logging.info(method_response_exception)
 
 
-# Read values from virtual sensor.
+# Name: read_adc
+# Description: Read values from virtual sensor
+# Parameters: device_client 
+# Returns: soil_moisture - value passed from counterfit UI sensor back to prosperity
 def read_adc(device_client):
     soil_moisture = None
     try:
@@ -91,6 +94,9 @@ def read_adc(device_client):
     return soil_moisture
 
 
+# Name: send_iot_message
+# Description: Sends a message to the IoT hub 
+# Parameters: soil_moisture and device_client 
 def send_iot_message(soil_moisture, device_client):
     try:
         message = Message(json.dumps({'soil_moisture': soil_moisture}))
@@ -100,6 +106,9 @@ def send_iot_message(soil_moisture, device_client):
         logging.info(send_message_exception)
 
 
+# Name: run
+# Description: The function used to run the sensor. Will continously check the soil moisture.
+# Parameters: device_client
 def run(device_client):
     device_client.on_method_request_received = handle_method_request
     while True:
