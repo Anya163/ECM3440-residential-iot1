@@ -33,6 +33,7 @@ relay = GroveRelay(RELAY_PIN)
 def counterfit_connection():
     try:
         CounterFitConnection.init(COUNTERFIT_HOST, COUNTERFIT_PORT)
+        logging.info("CounterFit Connection Established.")
     except Exception as counterfit_exception:
         logging.info("CounterFit Connection not Established.")
         logging.info(counterfit_exception)
@@ -46,9 +47,9 @@ def iot_hub_connection():
     try:
         device_client = IoTHubDeviceClient.\
             create_from_connection_string(IOT_HUB_CONNECTION_STRING)
-        print('Connecting')
+        logging.info('Connecting')
         device_client.connect()
-        print('Connected')
+        logging.info('Connected')
 
     except Exception as iot_hub_exception:
         logging.info("IoT Hub Connection not Established.")
@@ -66,13 +67,16 @@ def handle_method_request(request, device_client):
 
     if request.name == "relay_on":
         relay.on()
+        logging.info("Relay on")
     elif request.name == "relay_off":
         relay.off()
+        logging.info("Relay off")
 
     try:
         method_response = MethodResponse.\
             create_from_method_request(request, 200)
         device_client.send_method_response(method_response)
+        logging.info("Response successfully sent to CounterFit.")
     except Exception as method_response_exception:
         logging.info("Method Response Could Not Be Established.")
         logging.info(method_response_exception)
@@ -86,7 +90,7 @@ def read_adc(device_client):
     soil_moisture = None
     try:
         soil_moisture = adc.read(GPIO_PIN)
-        print("Soil moisture:", soil_moisture)
+        logging.info("Soil moisture:", soil_moisture)
     except Exception as soil_moisture_exception:
         logging.info("Sensor Could Not Be Read.")
         logging.info(soil_moisture_exception)
@@ -101,6 +105,7 @@ def send_iot_message(soil_moisture, device_client):
     try:
         message = Message(json.dumps({'soil_moisture': soil_moisture}))
         device_client.send_message(message)
+        logging.info("Data sent successfully to IoT Hub.")
     except Exception as send_message_exception:
         logging.info("Data Could Not Be Sent.")
         logging.info(send_message_exception)
