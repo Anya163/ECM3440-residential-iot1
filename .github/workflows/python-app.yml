@@ -47,16 +47,18 @@ jobs:
     needs: python-build
     
     steps:
-    if: github.ref == 'develop' 
     - name: 'Checkout GitHub Action'
+      if: github.ref == 'develop' 
       uses: actions/checkout@main
 
     - name: 'Login via Azure CLI'
+      if: github.ref == 'develop' 
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: 'Build and push image'
+      if: github.ref == 'develop' 
       uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.PROSPERITY_CR }}
@@ -72,6 +74,7 @@ jobs:
 
     steps:
     - name: Deploy to Azure App Service for containers
+      if: github.ref == 'develop' 
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'prosperityapp'
