@@ -42,6 +42,7 @@ jobs:
       run: |
         pytest prosperity/tests
 
+  if: ${GITHUB_REF##*/} in "develop, main" 
   image-build:
     runs-on: ubuntu-latest
     needs: python-build
