@@ -28,6 +28,9 @@ jobs:
     - name: Report on code efficiency
       run: |
         python -m radon cc "prosperity/components/sensor.py"
+    - name: Report on code maintainability
+      run: |
+        python -m radon mi "prosperity/components/sensor.py"
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
