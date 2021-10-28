@@ -29,8 +29,7 @@ adc = ADC()
 relay = GroveRelay(RELAY_PIN)
 
 # Name: counterfit_connection
-# Description: 
-# Establish connection with CounterFit App
+# Description: Establishes a connection with counterfit
 def counterfit_connection():
     try:
         CounterFitConnection.init(COUNTERFIT_HOST, COUNTERFIT_PORT)
@@ -39,7 +38,9 @@ def counterfit_connection():
         logging.info(counterfit_exception)
 
 
-# Establish connection with Azure IoT Hub
+# Name: iot_hub_connection
+# Description: Establish connection with Azure IoT Hub
+# Returns: Device client which is a client of the IoT Hub
 def iot_hub_connection():
     device_client = None
     try:
@@ -56,6 +57,10 @@ def iot_hub_connection():
     return device_client
 
 
+# Name: handle_method_request
+# Description: Relay between the sensor and counterfit. 
+#              When something is detected it is sent to counterfit.
+# Called from run.
 def handle_method_request(request, device_client):
     print("Direct method received - ", request.name)
 
