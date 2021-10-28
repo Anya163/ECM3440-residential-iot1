@@ -43,7 +43,7 @@ jobs:
         pytest prosperity/tests
 
   image-build:
-    if: github.ref == 'develop'
+    if: 'develop' in github.ref or 'main' in github.ref
     runs-on: ubuntu-latest
     needs: python-build
     
@@ -67,13 +67,12 @@ jobs:
         docker push ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
 
   deploy:
-    if: github.ref == 'develop'
+    if: 'develop' in github.ref or 'main' in github.ref
     runs-on: ubuntu-latest
     needs: image-build
 
     steps:
     - name: Deploy to Azure App Service for containers
-      if: github.ref == 'develop' 
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'prosperityapp'
