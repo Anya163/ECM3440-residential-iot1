@@ -28,6 +28,7 @@ IOT_HUB_CONNECTION_STRING = os.getenv('IOT_HUB_CONNECTION_STRING')
 adc = ADC()
 relay = GroveRelay(RELAY_PIN)
 
+
 # Name: counterfit_connection
 # Description: Establishes a connection with counterfit
 def counterfit_connection():
@@ -59,7 +60,7 @@ def iot_hub_connection():
 
 
 # Name: handle_method_request
-# Description: Relay between the sensor and counterfit. 
+# Description: Relay between the sensor and counterfit.
 #              When something is detected it is sent to counterfit.
 # Called from run.
 def handle_method_request(request, device_client):
@@ -84,8 +85,9 @@ def handle_method_request(request, device_client):
 
 # Name: read_adc
 # Description: Read values from virtual sensor
-# Parameters: device_client 
-# Returns: soil_moisture - value passed from counterfit UI sensor back to prosperity
+# Parameters: device_client
+# Returns: soil_moisture - value passed
+#                           from counterfit UI sensor back to prosperity
 def read_adc(device_client):
     soil_moisture = None
     try:
@@ -99,8 +101,8 @@ def read_adc(device_client):
 
 
 # Name: send_iot_message
-# Description: Sends a message to the IoT hub 
-# Parameters: soil_moisture and device_client 
+# Description: Sends a message to the IoT hub
+# Parameters: soil_moisture and device_client
 def send_iot_message(soil_moisture, device_client):
     try:
         message = Message(json.dumps({'soil_moisture': soil_moisture}))
@@ -112,7 +114,8 @@ def send_iot_message(soil_moisture, device_client):
 
 
 # Name: run
-# Description: The function used to run the sensor. Will continously check the soil moisture.
+# Description: The function used to run the sensor.
+#               Will continously check the soil moisture.
 # Parameters: device_client
 def run(device_client):
     device_client.on_method_request_received = handle_method_request
