@@ -43,7 +43,7 @@ jobs:
         pytest prosperity/tests
 
   image-build:
-    if: github.ref == 'develop' || github.ref == 'main'
+    if: ! contains(github.ref, 'feature') 
     runs-on: ubuntu-latest
     needs: python-build
     
