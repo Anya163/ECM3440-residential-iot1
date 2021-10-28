@@ -48,7 +48,7 @@ jobs:
     
     steps:
     - name: 'Checkout GitHub Action'
-      if: ${GITHUB_REF##*/} in "develop, main" 
+      if: github.ref == 'develop' 
       uses: actions/checkout@main
 
     - name: 'Login via Azure CLI'
