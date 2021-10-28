@@ -71,12 +71,14 @@ jobs:
       with:
         image-name: ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
 
-    - name: 'Push image to Prosperity CR'
+    - name: 'Login to Azure Container Registry'
       uses: azure/docker-login@v1
       with:
         login-server: ${{ secrets.PROSPERITY_CR }}
         username: ${{ secrets.PROSPERITY_CR_USERNAME }}
         password: ${{ secrets.PROSPERITY_CR_PASSWORD }}
+
+    - name: 'Push image to Prosperity CR'
       run: docker push ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
 
   deploy:
