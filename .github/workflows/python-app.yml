@@ -67,7 +67,7 @@ jobs:
         docker push ${{ secrets.PROSPERITY_CR }}/prosperity:${{ github.sha }}
 
   deploy:
-    if: github.ref == 'develop'
+    if: github.ref == 'develop' || github.ref == 'main'
     runs-on: ubuntu-latest
     needs: image-build
 
